@@ -12,10 +12,10 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
-      - name: set up JDK 17
+      - name: set up JDK 21 # Geändert von 17 auf 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21' # HIER ist der entscheidende Fix
           distribution: 'temurin'
 
       - name: Install Node.js
@@ -28,18 +28,14 @@ jobs:
 
       - name: Prepare Web Directory and Initialize
         run: |
-          # 1. Erstelle das www Verzeichnis
-          mkdir www
-          # 2. Kopiere deine Dateien dort hinein
+          mkdir -p www
           cp index.html style.css script.js banner.gif www/ || true
           
-          # 3. Projekt initialisieren
           echo '{ "name": "bot-admin", "version": "1.0.0" }' > package.json
           npm install
           npm install @capacitor/android
           
-          # 4. Capacitor mit www als Web-Dir initialisieren
-          npx cap init "BotAdmin" "com.deinname.botadmin" --web-dir www
+          npx cap init "BotAdmin" "com.aki.botadmin" --web-dir www
           npx cap add android
 
       - name: Build Android
