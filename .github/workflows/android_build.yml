@@ -26,13 +26,20 @@ jobs:
       - name: Install Ionic & Capacitor
         run: npm install -g @ionic/cli @capacitor/core @capacitor/cli
 
-      - name: Initialize Project and Install Android Platform
+      - name: Prepare Web Directory and Initialize
         run: |
+          # 1. Erstelle das www Verzeichnis
+          mkdir www
+          # 2. Kopiere deine Dateien dort hinein
+          cp index.html style.css script.js banner.gif www/ || true
+          
+          # 3. Projekt initialisieren
           echo '{ "name": "bot-admin", "version": "1.0.0" }' > package.json
           npm install
-          # WICHTIG: Android Paket explizit installieren
           npm install @capacitor/android
-          npx cap init "BotAdmin" "com.deinname.botadmin" --web-dir .
+          
+          # 4. Capacitor mit www als Web-Dir initialisieren
+          npx cap init "BotAdmin" "com.deinname.botadmin" --web-dir www
           npx cap add android
 
       - name: Build Android
