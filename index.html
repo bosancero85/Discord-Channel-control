@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Discord Admin Panel - User Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+    <header class="app-header">
+        <img src="banner.gif" alt="Admin Banner" class="header-banner">
+    </header>
+
+    <div class="content-wrapper">
+        <div class="sidebar">
+            <h2 class="neon-text">Bot-Manager</h2>
+            <hr border-color="#bc13fe">
+            
+            <div class="stats-box">
+                <div class="neon-text" style="font-size: 11px; margin-bottom: 5px;">STATISTIK</div>
+                <div>Gesendet: <span id="stat-sent" style="color: #28a745;">0</span></div>
+                <div>Fehler: <span id="stat-error" style="color: #dc3545;">0</span></div>
+                <div>Zyklen: <span id="stat-cycles" style="color: #007bff;">0</span></div>
+            </div>
+
+            <label style="font-size: 11px; color: #bc13fe;">Intervall (Sekunden):</label>
+            <input type="number" id="send-interval" value="5" min="1">
+
+            <button class="buy-btn" onclick="saveSettings()">⚙️ Speichern</button>
+            <button class="buy-btn" style="background: #28a745;" id="start-btn" onclick="startAction()">🚀 Loop Starten</button>
+            <button class="buy-btn" style="background: #dc3545; display: none;" id="stop-btn" onclick="stopAction()">🛑 STOPP</button>
+            <button class="buy-btn" style="background: #444;" onclick="resetStats()">♻️ Stats Reset</button>
+        </div>
+
+        <div class="main">
+            <div class="shop-card">
+                <h3 class="neon-text">Zugangsdaten</h3>
+                <input type="password" id="user-token" placeholder="Dein Discord User Token">
+            </div>
+            <div class="shop-card">
+                <h3 class="neon-text">Automation</h3>
+                <input type="text" id="new-channel-name" placeholder="Neuer Kanal-Name (Optional)">
+                <input type="text" id="target-channel-ids" placeholder="Kanal-IDs (mit Komma trennen)">
+            </div>
+            <div class="shop-card">
+                <h3 class="neon-text">Nachricht & Logs</h3>
+                <textarea id="broadcast-message" placeholder="Deine Nachricht hier..."></textarea>
+                <div id="log-container">
+                    <div style="color: #bc13fe;">> System bereit. Token eingeben und starten.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
